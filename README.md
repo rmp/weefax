@@ -1,4 +1,6 @@
-# mode7: a teletext carousel
+# weefax: a mode 7 teletext carousel
+
+## Weefax is not WeFax!
 
 `weefax.pl` loops through a folder of page files and transmits one page per
 tick over a WebSocket. `<mode7-screen>` is a web component that receives the
