@@ -13,7 +13,7 @@
 // selector, so the element must live in the main document, not inside
 // another component's shadow root.
 
-import { Teletext } from 'https://cdn.jsdelivr.net/npm/@techandsoftware/teletext@1.3.1/dist/teletext.min.js';
+import { Teletext } from '@techandsoftware/teletext';
 
 const PAGE_RE = /^[1-8][0-9A-F]{2}$/i;
 const ASPECT = 1.2; // the renderer's default width:height

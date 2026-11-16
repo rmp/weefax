@@ -8,7 +8,13 @@ when it comes round.
 ## Run
 
     cpanm Mojolicious
+    npm install && npm run build
     ./mode7d.pl daemon -l 'http://*:3000'
+
+Or in Docker, with the page folder mounted at `/pages`:
+
+    docker build -t mode7 .
+    docker run -p 3000:3000 -v "$PWD/pages:/pages:ro" mode7
 
 Open http://localhost:3000. For the authentic font, put `bedstead.otf` in
 `public/fonts/` (see the note there).
