@@ -20,8 +20,11 @@
 <script type="module">
   const tv = document.getElementById('tv');
   const status = document.getElementById('status');
-  tv.focus();
-  document.addEventListener('pointerdown', () => tv.focus());
+  const focusTv = () => tv.focus();
+  focusTv();
+  addEventListener('pageshow', focusTv);
+  addEventListener('focus', focusTv);
+  document.addEventListener('pointerdown', focusTv);
   tv.addEventListener('mode7-status', (e) => {
     status.value = { searching: 'Searching', found: 'Showing', offline: 'Reconnecting' }[e.detail.state];
   });
