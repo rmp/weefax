@@ -7,6 +7,10 @@ tick over a WebSocket. `<mode7-screen>` is a web component that receives the
 stream, rolls the header as pages go past, and shows the page you asked for
 when it comes round.
 
+Given this is not a one-to-many broadcast transmission, this websocket 
+implementation does not scale well for thousands of clients but copes 
+perfectly well with a few dozen kiosks in a home, business or similar venue.
+
 <a href="screenshot.png"><img src="screenshot.png" alt="weefax showing a teletext page" width="320"></a>
 
 ## Run
