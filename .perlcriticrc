@@ -1,0 +1,11 @@
+severity = 4
+verbose  = 8
+
+[TestingAndDebugging::RequireUseStrict]
+equivalent_modules = Mojo::Base Mojolicious::Lite
+
+[TestingAndDebugging::RequireUseWarnings]
+equivalent_modules = Mojo::Base Mojolicious::Lite
+
+# PPI reads subroutine signatures as prototypes.
+[-Subroutines::ProhibitSubroutinePrototypes]

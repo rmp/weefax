@@ -1,0 +1,14 @@
+^\.git
+^\.gitignore$
+^\.dockerignore$
+^local/
+^node_modules/
+^pages/
+^public/mode7-screen\.js
+^blib/
+^Build$
+^_build/
+^MYMETA\.
+^Weefax-[0-9]
+\.bak$
+~$

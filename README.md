@@ -1,6 +1,6 @@
 # mode7: a teletext carousel
 
-`mode7d.pl` loops through a folder of page files and transmits one page per
+`weefax.pl` loops through a folder of page files and transmits one page per
 tick over a WebSocket. `<mode7-screen>` is a web component that receives the
 stream, rolls the header as pages go past, and shows the page you asked for
 when it comes round.
@@ -9,7 +9,7 @@ when it comes round.
 
     cpanm Mojolicious
     npm install && npm run build
-    ./mode7d.pl daemon -l 'http://*:3000'
+    ./weefax.pl daemon -l 'http://*:3000'
 
 Or in Docker, with the page folder mounted at `/pages`:
 
@@ -89,6 +89,35 @@ you can draw in edit.tf and paste one link per `@screen`.
 high-bit control codes). Each `PN` line starts another screen, and
 `CT,<n>,T` (seconds) or `CT,<n>,C` (cycles) sets its delay.
 
+## Daily news
+
+`weefax-news.pl` turns free RSS and Atom feeds into pages under
+`pages/daily/`: a contents page, and for each section an index page plus up
+to nine stories, each a headline and summary that rotates over several
+screens when long. `news.conf` lists the sections, their page numbers and
+feeds; stories from several feeds are interleaved and deduplicated.
+
+    make up      # server on :8080, news refreshed now and every 24 h
+    make news    # one refresh now
+    make test    # unit and author tests, in Docker
+
+A feed that fails is retried; a section whose feeds all fail keeps its
+previous pages; a run where everything fails changes nothing. Pages are
+built in a hidden folder and swapped in, so the carousel never shows a
+half-written run. Link the contents page (120 by default) from page 100.
+
+## Tests
+
+`make test` builds the Docker `test` stage: it installs the develop
+prerequisites listed in `Build.PL`, builds the distribution and runs
+`prove -lr t xt` inside it. `t/` holds unit tests for `Weefax` and
+`Weefax::News` and an HTTP/WebSocket test of `weefax.pl`; `xt/` runs
+Perl::Critic (`.perlcriticrc`, severity 4), Test::Pod, Test::Pod::Coverage,
+Test::Kwalitee, Test::CPAN::Changes and Test::MinimumVersion (5.020).
+`prove -l t` runs the unit tests alone with a local Mojolicious.
+
+`perl Build.PL && ./Build dist` builds a tarball (Module::Build).
+
 ## Component
 
     <script type="module" src="mode7-screen.js"></script>
@@ -110,7 +139,7 @@ target; `.pages` is the server's current index.
 Events: `mode7-status` (`searching`, `found`, `offline`) and `mode7-page`
 (`{page, subpage, subpages}`) each time a new page or subpage appears.
 
-The renderer (`@techandsoftware/teletext` 1.3.1, from jsDelivr) attaches its
+The renderer (`@techandsoftware/teletext` 1.3.1, bundled by `npm run build`) attaches its
 SVG via a document-level selector, so the element must sit in the main
 document rather than inside another component's shadow root. On Safari and
 iOS its SVG mosaics can render badly; the library's `classic__font-for-mosaic`

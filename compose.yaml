@@ -1,0 +1,18 @@
+services:
+  weefax:
+    build: .
+    image: weefax
+    ports: ["8080:3000"]
+    volumes: ["./pages:/pages:ro"]
+    restart: unless-stopped
+
+  news:
+    image: weefax
+    depends_on: [weefax]
+    user: "${PAGES_UID:-65534}:${PAGES_GID:-65534}"
+    volumes:
+      - ./pages:/pages
+      - ./news.conf:/app/news.conf:ro
+    # ponytail: fixed 24 h sleep drifts by each run's length; use cron if the hour matters
+    command: ["sh", "-c", "while :; do perl weefax-news.pl; sleep 86400; done"]
+    restart: unless-stopped

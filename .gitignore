@@ -2,3 +2,9 @@ pages/
 node_modules/
 public/mode7-screen.js
 public/mode7-screen.js.map
+local/
+blib/
+/Build
+/_build/
+MYMETA.*
+/Weefax-[0-9]*

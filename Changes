@@ -1,0 +1,5 @@
+Revision history for Weefax
+
+0.01  2026-11-16
+      - Carousel server, <mode7-screen> web component and Docker packaging.
+      - Daily news pages from free RSS and Atom feeds.
