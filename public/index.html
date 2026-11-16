@@ -1,37 +1,61 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mode 7 carousel</title>
-<style>
-  html, body { margin: 0; height: 100%; background: #000; color: #fff; }
-  body { display: grid; place-items: center; font: 16px/1.4 Bedstead, monospace; }
-  main { width: min(960px, 100vw - 2rem); }
-  output { display: block; margin-top: 1rem; text-align: right; color: #0f0; }
-</style>
-<script type="module" src="mode7-screen.js"></script>
-</head>
-<body>
-<main>
-  <mode7-screen id="tv" page="100"></mode7-screen>
-  <output id="status">Connecting</output>
-</main>
-<script type="module">
-  const tv = document.getElementById('tv');
-  const status = document.getElementById('status');
-  const focusTv = () => tv.focus();
-  focusTv();
-  addEventListener('pageshow', focusTv);
-  addEventListener('focus', focusTv);
-  document.addEventListener('pointerdown', focusTv);
-  tv.addEventListener('mode7-status', (e) => {
-    status.value = { searching: 'Searching', found: 'Showing', offline: 'Reconnecting' }[e.detail.state];
-  });
-  tv.addEventListener('mode7-page', (e) => {
-    const { page, subpage, subpages } = e.detail;
-    status.value = subpages > 1 ? `Showing ${page}, ${subpage} of ${subpages}` : `Showing ${page}`;
-  });
-</script>
-</body>
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mode 7 carousel</title>
+	<style>
+	 html, body {
+	     margin:     0;
+	     height:     100%;
+	     background: #000;
+	     color:      #fff;
+	 }
+
+	 body   {
+	     display: grid;
+	     place-items: center;
+	     font: 16px/1.4 Bedstead, monospace;
+	 }
+
+	 main   {
+	     width: min(960px, 100vw - 2rem);
+	 }
+
+	 output {
+	     display:    block;
+	     margin-top: 1rem;
+	     text-align: right;
+	     color:      #0f0;
+	 }
+
+	</style>
+	<script type="module" src="mode7-screen.js"></script>
+    </head>
+    <body>
+	<main>
+	    <mode7-screen id="tv" page="100"></mode7-screen>
+	    <output id="status">Connecting</output>
+	</main>
+	<script type="module">
+	 const tv     = document.getElementById('tv');
+	 const status = document.getElementById('status');
+	 const focusTv = () => tv.focus();
+
+	 focusTv();
+
+	 addEventListener('pageshow', focusTv);
+	 addEventListener('focus', focusTv);
+	 document.addEventListener('pointerdown', focusTv);
+
+	 tv.addEventListener('mode7-status', (e) => {
+	     status.value = { searching: 'Searching', found: 'Showing', offline: 'Reconnecting' }[e.detail.state];
+	 });
+
+	 tv.addEventListener('mode7-page', (e) => {
+	     const { page, subpage, subpages } = e.detail;
+	     status.value = subpages > 1 ? `Showing ${page}, ${subpage} of ${subpages}` : `Showing ${page}`;
+	 });
+	</script>
+    </body>
 </html>
