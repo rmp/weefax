@@ -5,6 +5,8 @@ tick over a WebSocket. `<mode7-screen>` is a web component that receives the
 stream, rolls the header as pages go past, and shows the page you asked for
 when it comes round.
 
+<a href="screenshot.png"><img src="screenshot.png" alt="weefax showing a teletext page" width="320"></a>
+
 ## Run
 
     cpanm Mojolicious
