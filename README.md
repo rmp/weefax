@@ -1,4 +1,4 @@
-# weefax: a mode 7 teletext carousel
+# weefax: a mode 7-style teletext carousel
 
 ## Weefax is not WeFax!
 
