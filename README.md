@@ -130,6 +130,20 @@ picture area suits landscapes best. Images are decoded with `djpeg`
 (libjpeg-turbo). A failed run leaves the previous page in place. `make up`
 refreshes it with the news.
 
+## Weather
+
+`weefax-weather.pl` reads the Met Office's UK and regional text forecasts
+and replaces `pages/weather/`: 400 shows city temperatures, then the
+national forecast; 401 indexes the 16 regions; 402–417 are the regions,
+each a headline and forecast rotating over screens.
+
+    ./weefax-weather.pl [output folder]
+    make weather # one refresh now, in Docker
+
+The forecasts are read from the Met Office website, which needs no key but
+may change its markup. A region that fails keeps its previous page; if the
+UK forecast fails nothing changes. `make up` refreshes it with the news.
+
 ## Tests
 
 `make test` builds the Docker `test` stage: it installs the develop

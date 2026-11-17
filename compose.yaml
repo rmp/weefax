@@ -14,5 +14,5 @@ services:
       - ./pages:/pages
       - ./news.conf:/app/news.conf:ro
     # ponytail: fixed 24 h sleep drifts by each run's length; use cron if the hour matters
-    command: ["sh", "-c", "while :; do perl weefax-news.pl; perl weefax-art.pl; sleep 86400; done"]
+    command: ["sh", "-c", "while :; do perl weefax-news.pl; perl weefax-art.pl; perl weefax-weather.pl; sleep 86400; done"]
     restart: unless-stopped

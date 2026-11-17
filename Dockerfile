@@ -22,7 +22,7 @@ RUN perl Build.PL && ./Build manifest && ./Build distdir \
 FROM base
 WORKDIR /app
 COPY lib lib
-COPY weefax.pl weefax-news.pl weefax-art.pl news.conf ./
+COPY weefax.pl weefax-news.pl weefax-art.pl weefax-weather.pl news.conf ./
 COPY public public
 COPY --from=build /src/public/mode7-screen.js public/
 ENV MODE7_PAGES=/pages MOJO_MODE=production
