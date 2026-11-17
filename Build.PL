@@ -7,7 +7,7 @@ Module::Build->new(
   dist_author        => 'Roger Pettett <rmp@psyphi.net>',
   dist_version_from  => 'lib/Weefax.pm',
   license            => 'perl',
-  script_files       => [ 'weefax.pl', 'weefax-news.pl' ],
+  script_files       => [ 'weefax.pl', 'weefax-news.pl', 'weefax-art.pl' ],
   configure_requires => { 'Module::Build' => '0.4004' },
   requires           => {
     'perl'               => '5.020',

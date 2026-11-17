@@ -114,6 +114,22 @@ previous pages; a run where everything fails changes nothing. Pages are
 built in a hidden folder and swapped in, so the carousel never shows a
 half-written run. Link the contents page (120 by default) from page 100.
 
+## Artwork of the day
+
+`weefax-art.pl` picks a random public-domain highlight painting from the
+Metropolitan Museum of Art's open-access API and writes
+`pages/art/600 artwork.txt`: the painting drawn in dithered, held mosaics
+with its title and artist, then an about screen with the artist's dates, the
+medium and the opening of its Wikipedia article, when it has one.
+
+    ./weefax-art.pl [--page 600] [--out pages/art] [--aspect 0.8-2.5]
+    make art     # one refresh now, in Docker
+
+`--aspect` limits the width/height ratio of the paintings picked; the
+picture area suits landscapes best. Images are decoded with `djpeg`
+(libjpeg-turbo). A failed run leaves the previous page in place. `make up`
+refreshes it with the news.
+
 ## Tests
 
 `make test` builds the Docker `test` stage: it installs the develop
